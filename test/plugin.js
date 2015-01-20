@@ -10,13 +10,14 @@ var expect = chai.expect;
 chai.use(require('sinon-chai'));
 chai.use(require('chai-as-promised'));
 
-var arkivo       = require('arkivo');
+//var arkivo       = require('arkivo');
 var hydra        = require('../lib/plugin');
 
 var Session      = require('arkivo/lib/sync').Session;
 
-var plugins      = arkivo.plugins;
-var Subscription = arkivo.Subscription;
+var plugins      = require('arkivo/lib/plugins');
+//var plugins      = arkivo.plugins;
+//var Subscription = arkivo.Subscription;
 
 
 describe('Hydra Plugin', function () {

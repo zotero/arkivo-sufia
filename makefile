@@ -23,7 +23,7 @@ spec:
 	@${BIN}/mocha --harmony-generators --reporter spec ${TEST}
 
 coverage: clean
-	@node --harmony-generators \
+	node --harmony-generators \
 		${BIN}/istanbul cover ${BIN}/_mocha -- ${TEST}
 
 clean:
