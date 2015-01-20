@@ -1,0 +1,23 @@
+{
+  "name": "arkivo-hydra",
+  "version": "0.0.0",
+  "description": "A Zotero/Arkivo plugin to sync to Project Hydra services",
+  "main": "lib/plugin.js",
+  "scripts": {
+    "test": "make test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/inukshuk/arkivo-hydra.git"
+  },
+  "keywords": [
+    "zotero",
+    "arkivo"
+  ],
+  "author": "Sylvester Keil",
+  "license": "AGPL-3.0",
+  "bugs": {
+    "url": "https://github.com/inukshuk/arkivo-hydra/issues"
+  },
+  "homepage": "https://github.com/inukshuk/arkivo-hydra"
+}
