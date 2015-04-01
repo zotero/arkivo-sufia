@@ -1,5 +1,5 @@
 {
-  "name": "arkivo-hydra",
+  "name": "arkivo-sufia",
   "version": "0.0.0",
   "description": "A Zotero/Arkivo plugin to sync to Project Hydra services",
   "main": "lib/plugin.js",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/inukshuk/arkivo-hydra.git"
+    "url": "git://github.com/inukshuk/arkivo-sufia.git"
   },
   "keywords": [
     "zotero",
@@ -17,9 +17,9 @@
   "author": "Sylvester Keil",
   "license": "AGPL-3.0",
   "bugs": {
-    "url": "https://github.com/inukshuk/arkivo-hydra/issues"
+    "url": "https://github.com/inukshuk/arkivo-sufia/issues"
   },
-  "homepage": "https://github.com/inukshuk/arkivo-hydra",
+  "homepage": "https://github.com/inukshuk/arkivo-sufia",
   "dependencies": {
     "bluebird": "^2.8.1",
     "debug": "^2.1.1",
