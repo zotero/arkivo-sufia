@@ -41,12 +41,16 @@ describe('Hydra Plugin', function () {
     expect(plugins.use('sufia')).to.have.property('summary');
   });
 
-  it('must be configured with a host', function () {
+  it('must be configured with a host and a token', function () {
     var config = {};
 
     expect(plugins.use.bind(plugins, 'sufia', config)).to.throw(Error);
 
     config.host = 'http://example.com:8181';
+
+    expect(plugins.use.bind(plugins, 'sufia', config)).to.throw(Error);
+
+    config.token = 'abcdefg';
 
     expect(plugins.use.bind(plugins, 'sufia', config)).to.not.throw(Error);
   });
