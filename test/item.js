@@ -11,10 +11,34 @@ chai.use(require('sinon-chai'));
 chai.use(require('chai-as-promised'));
 
 var SufiaItem = require('../lib/item');
+var fixtures  = require('./fixtures.json');
 
 describe('SufiaItem', function () {
+  var item;
+
+  beforeEach(function () { item = new SufiaItem(); });
 
   it('is a constructor function', function () {
     expect(SufiaItem).to.be.a('function');
+  });
+
+  describe('.parse', function () {
+    it('fails unless given a useful zotero item', function () {
+      expect(item.parse.bind(item, null)).to.throw();
+      expect(item.parse.bind(item, {})).to.throw();
+    });
+
+    it('parses zotero items', function () {
+      var z = fixtures.zotero.derrida;
+
+      item.parse(z);
+
+      expect(item.metadata.title).to.eql(z.data.title);
+      expect(item.metadata.resourceType).to.eql('Article');
+      expect(item.metadata.description).to.eql(z.data.abstractNote);
+      expect(item.metadata.rights).to.eql(z.data.rights);
+
+      expect(item.metadata.identifier).to.be.undefined;
+    });
   });
 });

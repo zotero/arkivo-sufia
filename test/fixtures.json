@@ -1,0 +1,93 @@
+{
+  "zotero": {
+    "derrida": {
+      "key": "ITKAJNTH",
+      "version": 12,
+      "library": {
+        "type": "user",
+        "id": 1956159,
+        "name": "inukshuk",
+        "links": {
+          "alternate": {
+            "href": "https://www.zotero.org/inukshuk",
+            "type": "text/html"
+          }
+        }
+      },
+      "links": {
+        "self": {
+          "href": "https://api.zotero.org/users/1956159/items/ITKAJNTH",
+          "type": "application/json"
+        },
+        "alternate": {
+          "href": "https://www.zotero.org/inukshuk/items/ITKAJNTH",
+          "type": "text/html"
+        }
+      },
+      "meta": {
+        "creatorSummary": "Derrida",
+        "parsedDate": "1975",
+        "numChildren": 2
+      },
+      "data": {
+        "key": "ITKAJNTH",
+        "version": 12,
+        "itemType": "journalArticle",
+        "title": "The Purveyor of Truth (Le Facteur de la Vérité)",
+        "creators": [
+          {
+            "creatorType": "author",
+            "firstName": "Jacques",
+            "lastName": "Derrida"
+          },
+          {
+            "creatorType": "translator",
+            "firstName": "Willis",
+            "lastName": "Domingo"
+          },
+          {
+            "creatorType": "translator",
+            "firstName": "James",
+            "lastName": "Hulbert"
+          },
+          {
+            "creatorType": "translator",
+            "firstName": "Moshe",
+            "lastName": "Ron"
+          }
+        ],
+        "abstractNote": "Published in Yale French Studies",
+        "publicationTitle": "Yale French Studies",
+        "volume": "",
+        "issue": "52",
+        "pages": "31–113",
+        "date": "1975",
+        "series": "",
+        "seriesTitle": "",
+        "seriesText": "",
+        "journalAbbreviation": "",
+        "language": "fr",
+        "DOI": "",
+        "ISSN": "",
+        "shortTitle": "Purveyor",
+        "url": "",
+        "accessDate": "",
+        "archive": "",
+        "archiveLocation": "",
+        "libraryCatalog": "",
+        "callNumber": "",
+        "rights": "Copyright © 1975 Yale University Press",
+        "extra": "",
+        "dateAdded": "2014-06-06T13:15:27Z",
+        "dateModified": "2014-09-10T14:45:18Z",
+        "tags": [
+          "American Renaissance"
+        ],
+        "collections": [
+          "D8GGDZST"
+        ],
+        "relations": {}
+      }
+    }
+  }
+}
