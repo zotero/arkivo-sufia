@@ -81,7 +81,9 @@
         "dateAdded": "2014-06-06T13:15:27Z",
         "dateModified": "2014-09-10T14:45:18Z",
         "tags": [
-          "American Renaissance"
+          {
+            "tag": "American Renaissance"
+          }
         ],
         "collections": [
           "D8GGDZST"

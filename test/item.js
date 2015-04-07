@@ -39,6 +39,12 @@ describe('SufiaItem', function () {
       expect(item.metadata.rights).to.eql(z.data.rights);
 
       expect(item.metadata.identifier).to.be.undefined;
+
+      expect(item.metadata.creators).to.have.length(4);
+      expect(item.metadata.tags).to.have.length(1);
+
+      expect(item.metadata.tags[0]).to.eql(z.data.tags[0].tag);
+      expect(item.metadata.creators[1]).to.eql(z.data.creators[1]);
     });
   });
 });
