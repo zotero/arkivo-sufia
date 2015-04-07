@@ -13,7 +13,7 @@ chai.use(require('chai-as-promised'));
 //var arkivo       = require('arkivo');
 var sufia        = require('../lib/plugin');
 
-var Session      = require('arkivo/lib/sync').Session;
+//var Session      = require('arkivo/lib/sync').Session;
 
 var plugins      = require('arkivo/lib/plugins');
 //var plugins      = arkivo.plugins;
@@ -41,17 +41,45 @@ describe('Hydra Plugin', function () {
     expect(plugins.use('sufia')).to.have.property('summary');
   });
 
-  it('must be configured with a host and a token', function () {
+  describe('configuration', function () {
     var config = {};
 
-    expect(plugins.use.bind(plugins, 'sufia', config)).to.throw(Error);
+    it('must contain base url and a token', function () {
 
-    config.host = 'http://example.com:8181';
+      expect(plugins.use.bind(plugins, 'sufia', config)).to.throw(Error);
 
-    expect(plugins.use.bind(plugins, 'sufia', config)).to.throw(Error);
+      config.base = 'http://example.com:8181';
 
-    config.token = 'abcdefg';
+      expect(plugins.use.bind(plugins, 'sufia', config)).to.throw(Error);
 
-    expect(plugins.use.bind(plugins, 'sufia', config)).to.not.throw(Error);
+      config.token = 'abcdefg';
+
+      expect(plugins.use.bind(plugins, 'sufia', config)).to.not.throw(Error);
+    });
+
+    it('base url must be a valid HTTP url', function () {
+      config.token = 'abcdefg';
+      config.base = 'example.com';
+
+      expect(plugins.use.bind(plugins, 'sufia', config)).to.throw(Error);
+
+      config.base = 'example.com:3000';
+      expect(plugins.use.bind(plugins, 'sufia', config)).to.throw(Error);
+
+      config.base = 'ftp://example.com:3000';
+      expect(plugins.use.bind(plugins, 'sufia', config)).to.throw(Error);
+
+      config.base = 'http://example.com:3000';
+      expect(plugins.use.bind(plugins, 'sufia', config)).to.not.throw(Error);
+
+      config.base = 'https://example.com:3000';
+      expect(plugins.use.bind(plugins, 'sufia', config)).to.not.throw(Error);
+
+      config.base = 'https://example.com/api';
+      expect(plugins.use.bind(plugins, 'sufia', config)).to.not.throw(Error);
+
+      config.base = 'http://example.com:3000/api';
+      expect(plugins.use.bind(plugins, 'sufia', config)).to.not.throw(Error);
+    });
   });
 });
