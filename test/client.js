@@ -10,21 +10,24 @@ var expect = chai.expect;
 chai.use(require('sinon-chai'));
 chai.use(require('chai-as-promised'));
 
-var HydraClient = require('../lib/client');
-var HTTPClient  = require('../lib/http');
+var SufiaClient  = require('../lib/client');
+var HTTPClient   = require('../lib/http');
 
-//var Session      = require('arkivo/lib/sync').Session;
-//var Subscription = arkivo.Subscription;
+var arkivo       = require('arkivo');
+var Session      = arkivo.Synchronizer.Session;
+var Subscription = arkivo.Subscription;
 
 
-describe('HydraClient', function () {
+describe('SufiaClient', function () {
   var client;
 
-  beforeEach(function () { client = new HydraClient(); });
+  beforeEach(function () {
+    client = new SufiaClient(null, new Session(new Subscription()));
+  });
 
   it('is a constructor function', function () {
-    expect(HydraClient).to.be.a('function');
-    expect(client).to.be.instanceOf(HydraClient);
+    expect(SufiaClient).to.be.a('function');
+    expect(client).to.be.instanceOf(SufiaClient);
   });
 
   it('inherits from HTTPClient', function () {
