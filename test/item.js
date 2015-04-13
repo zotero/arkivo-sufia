@@ -10,6 +10,10 @@ var expect = chai.expect;
 chai.use(require('sinon-chai'));
 chai.use(require('chai-as-promised'));
 
+var arkivo = require('arkivo');
+var common = arkivo.common;
+var base64 = common.base64;
+
 var SufiaItem = require('../lib/item');
 var fixtures  = require('./fixtures.json');
 
@@ -45,6 +49,20 @@ describe('SufiaItem', function () {
 
       expect(item.metadata.tags[0]).to.eql(z.data.tags[0].tag);
       expect(item.metadata.creators[1]).to.eql(z.data.creators[1]);
+    });
+  });
+
+  describe('.attach', function () {
+    it('adds zotero attachment items', function () {
+      var child = fixtures.zotero['derrida-child'];
+      var data  = fixtures.zotero['derrida-data'];
+
+      item.attach(child, data);
+
+      expect(item.file.filename).to.eql(child.data.filename);
+      expect(item.file.md5).to.eql(child.data.md5);
+
+      expect(item.file.base64).to.eql(base64(data));
     });
   });
 });

@@ -90,6 +90,63 @@
         ],
         "relations": {}
       }
-    }
+    },
+    "derrida-child": {
+      "key": "GA4XXD8D",
+      "version": 22,
+      "library": {
+        "type": "user",
+        "id": 1956159,
+        "name": "inukshuk",
+        "links": {
+          "alternate": {
+            "href": "https://www.zotero.org/inukshuk",
+            "type": "text/html"
+          }
+        }
+      },
+      "links": {
+        "self": {
+          "href": "https://api.zotero.org/users/1956159/items/GA4XXD8D",
+          "type": "application/json"
+        },
+        "alternate": {
+          "href": "https://www.zotero.org/inukshuk/items/GA4XXD8D",
+          "type": "text/html"
+        },
+        "up": {
+          "href": "https://api.zotero.org/users/1956159/items/ITKAJNTH",
+          "type": "application/json"
+        },
+        "enclosure": {
+          "type": "application/pdf",
+          "href": "https://api.zotero.org/users/1956159/items/GA4XXD8D/file/view",
+          "title": "Purveyor of Truth.pdf",
+          "length": 5632693
+        }
+      },
+      "meta": {},
+      "data": {
+        "key": "GA4XXD8D",
+        "version": 22,
+        "parentItem": "ITKAJNTH",
+        "itemType": "attachment",
+        "linkMode": "imported_file",
+        "title": "Purveyor Truth",
+        "accessDate": "",
+        "url": "",
+        "dateAdded": "2014-08-27T12:03:44Z",
+        "dateModified": "2015-04-02T14:36:48Z",
+        "note": "",
+        "contentType": "application/pdf",
+        "charset": "",
+        "filename": "Purveyor of Truth.pdf",
+        "md5": "5e5a6852bc78f6e3312be7cf890dadbb",
+        "mtime": 1409141024000,
+        "tags": [],
+        "relations": {}
+      }
+    },
+    "derrida-data": "0123456789;asdfghjkl;'"
   }
 }
