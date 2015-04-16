@@ -21,3 +21,6 @@ puppet
 
 # Vagrant cache
 .vagrant
+
+# Test files
+test
