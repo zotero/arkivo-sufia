@@ -23,7 +23,7 @@
   "dependencies": {
     "bluebird": "^2.8.1",
     "debug": "^2.1.1",
-    "superagent": "^0.21.0"
+    "superagent": "^1.0.0"
   },
   "devDependencies": {
     "arkivo": "inukshuk/arkivo",
