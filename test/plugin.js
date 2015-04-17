@@ -44,7 +44,7 @@ describe('Hydra Plugin', function () {
   describe('configuration', function () {
     var config = {};
 
-    it('must contain base url and a token', function () {
+    it('must contain a token', function () {
 
       expect(plugins.use.bind(plugins, 'sufia', config)).to.throw(Error);
 

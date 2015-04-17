@@ -42,7 +42,7 @@ describe('SufiaClient', function () {
     it('has CRUD paths', function () {
       expect(client)
         .to.have.property('options')
-        .that.has.keys(['create', 'update', 'delete', 'base']);
+        .that.has.keys(['create', 'update', 'delete', 'base', 'mimetypes']);
 
       expect(client.options.update).to.match(/api\/items\/:id$/);
     });
