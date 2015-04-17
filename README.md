@@ -19,6 +19,27 @@ Add a minimal configuration file, e.g., `config/default.json`:
       }
     }
 
+You can also configure the plugin's default settings in your
+config file:
+
+    {
+      "arkivo": {
+        "plugins": [ "arkivo-sufia" ],
+
+        "sufia": {
+          "base": "http://localhost:3000",
+
+          "create": "/api/items",
+          "update": "/api/items/:id",
+          "delete": "/api/items/:id",
+
+          "mimetypes" [
+            "application/pdf"
+          ]
+        }
+      }
+    }
+
 For more configuration options, please consult Arkivo's
 [documentation](https://github.com/inukshuk/arkivo#configuration).
 
@@ -41,7 +62,6 @@ For example:
         {
           "name": "sufia",
           "options": {
-            "base": "http://localhost:3000",
             "token": "<sufia-access-token>"
           }
         }
@@ -53,7 +73,7 @@ a sync request if Arkivo is already running):
 
     $ $(npm bin)/arkivo /users/<zotero-user>/collections/<collection>/items \
       -K <zotero-api-key> \
-      -P sufia:\"base\":\"http://localhost:3000\",\"token\":\"<sufia-access-token>\"
+      -P sufia:\"token\":\"<sufia-access-token>\"
 
     $ $(npm bin)/arkivo sync -d
 
