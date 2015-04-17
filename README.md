@@ -52,8 +52,12 @@ check the output of:
 
     $ $(npm bin)/arkivo-plugins list
 
-Next POST your subscriptions to `http://localhost:8888/api/subscription`.
-For example:
+Subscriptions
+-------------
+
+### JSON API
+You can create subscriptions using Arkivo's JSON API. For example,
+consider the following POST to `http://localhost:8888/api/subscription`:
 
     {
       "url": "/users/<zotero-user>/collections/<collection>/items",
@@ -68,6 +72,11 @@ For example:
       ]
     }
 
+Note that you can additionaly pass a `base` URL for each subscription;
+this allows you to pin individual subscriptions to Sufia hosts other
+than the default one.
+
+### Command line
 Alternatively, use the command line to add you subscriptions (and issue
 a sync request if Arkivo is already running):
 
