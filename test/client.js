@@ -3,6 +3,7 @@
 var chai   = require('chai');
 var sinon  = require('sinon');
 var B      = require('bluebird');
+var nock   = require('nock');
 
 var expect = chai.expect;
 
@@ -10,6 +11,7 @@ chai.use(require('sinon-chai'));
 chai.use(require('chai-as-promised'));
 
 var SufiaClient  = require('../lib/client');
+var SufiaItem    = require('../lib/item');
 var HTTPClient   = require('../lib/http');
 
 var arkivo       = require('arkivo');
@@ -19,7 +21,7 @@ var base64       = common.base64;
 var Session      = arkivo.Synchronizer.Session;
 var Subscription = arkivo.Subscription;
 
-var F = require('./fixtures.json');
+var F = require('./fixtures.json').zotero;
 
 describe('SufiaClient', function () {
   var client, session;
@@ -48,27 +50,69 @@ describe('SufiaClient', function () {
     });
   });
 
-  describe('.collect()', function () {
+  describe('given a sync session with an item', function () {
     beforeEach(function () {
-      session.items[F.zotero.derrida.key] =
-        extend({}, F.zotero.derrida, { children: [F.zotero['derrida-child']] });
+      session.items[F.derrida.key] =
+        extend({}, F.derrida, { children: [F['derrida-child']] });
 
-      sinon.stub(client, 'download', function () {
-        return B.resolve(F.zotero['derrida-data']);
+      sinon.stub(client, 'download', function (key) {
+        return (key === F['derrida-child'].key)
+          ? B.resolve(F['derrida-data'])
+          : B.reject();
       });
     });
 
-    it('returns an empty object for an empty list', function () {
-      return expect(client.collect([])).to.eventually.eql({});
+    describe('.collect()', function () {
+      it('returns an empty object for an empty list', function () {
+        return expect(client.collect([])).to.eventually.eql({});
+      });
+
+      it('converts and returns all items for the given keys', function () {
+        return expect(client.collect([F.derrida.key]))
+          .to.eventually.have.property(F.derrida.key)
+          .and.to.have.keys(['metadata', 'file', 'token'])
+          .and.to.have.property('file')
+          .and.to.have.property('base64', base64(F['derrida-data']));
+      });
     });
 
-    it('converts and returns all items for the given keys', function () {
-      return expect(client.collect([F.zotero.derrida.key]))
-        .to.eventually.have.property(F.zotero.derrida.key)
-        .and.to.have.keys(['metadata', 'file', 'token'])
-        .and.to.have.property('file')
-        .and.to.have.property('base64', base64(F.zotero['derrida-data']));
+    describe('.create()', function () {
+      var item, token = 'badc0de';
 
+      beforeEach(function () {
+      item = new SufiaItem(
+            token, F.derrida, F['derrida-child'], F['derrida-data']);
+      });
+
+      it('sends the item to sufia', function () {
+        var mhttp = nock('http://localhost:3000')
+          .post('/api/items', function (body) {
+
+            expect(body).to.have.keys(['token', 'metadata', 'file']);
+            expect(body.token).to.eql(token);
+
+            expect(body.metadata.tags).to.contain(F.derrida.data.tags[0].tag);
+
+            return true;
+
+          }).reply(201);
+
+        return client.create(F.derrida.key, item)
+          .finally(function () { expect(mhttp.isDone()).to.be.true; });
+      });
+
+      it('registers the id returned by sufia', function () {
+        nock('http://localhost:3000')
+          .post('/api/items')
+          .reply(201, '', {
+            Location: 'http://localhost:3000/api/items/12345'
+          });
+
+        return client.create(F.derrida.key, item)
+          .finally(function () {
+            expect(client.registry).to.have.property(F.derrida.key, '12345');
+          });
+      });
     });
   });
 });
