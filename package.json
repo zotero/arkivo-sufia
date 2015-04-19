@@ -1,6 +1,6 @@
 {
   "name": "arkivo-sufia",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "A Zotero/Arkivo plugin to sync to Project Hydra services",
   "main": "lib/plugin.js",
   "scripts": {
@@ -26,7 +26,7 @@
     "superagent": "^1.0.0"
   },
   "devDependencies": {
-    "arkivo": "inukshuk/arkivo",
+    "arkivo": "*",
     "chai": "^1.10.0",
     "chai-as-promised": "^4.1.1",
     "eslint": "^0.12.0",
