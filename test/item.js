@@ -50,6 +50,14 @@ describe('SufiaItem', function () {
       expect(item.metadata.tags[0]).to.eql(z.data.tags[0].tag);
       expect(item.metadata.creators[1]).to.eql(z.data.creators[1]);
     });
+
+    it('returns valid items', function () {
+      var i = new SufiaItem(null, { data: {} });
+
+      expect(i.metadata.creators).to.eql([]);
+      expect(i.metadata.tags).to.eql([]);
+      expect(i.metadata).to.have.property('rights', 'All rights reserved');
+    });
   });
 
   describe('.attach', function () {
