@@ -50,6 +50,21 @@ describe('SufiaClient', function () {
     });
   });
 
+  describe('.path()', function () {
+    it('returns path for given action', function () {
+      expect(client.path('create')).to.eql(client.options.create);
+      expect(client.path('update')).to.eql(client.options.update);
+    });
+
+    it('replaces given parameters', function () {
+      expect(client.path('create', { id: 'abc' }))
+        .to.eql(client.options.create);
+
+      expect(client.path('update', { id: 'abc' }))
+        .to.eql('http://localhost:3000/api/items/abc');
+    });
+  });
+
   describe('given a sync session with an item', function () {
     beforeEach(function () {
       session.items[F.derrida.key] =
