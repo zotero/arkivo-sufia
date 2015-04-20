@@ -95,8 +95,8 @@ describe('SufiaClient', function () {
       var item, token = 'badc0de';
 
       beforeEach(function () {
-      item = new SufiaItem(
-            token, F.derrida, F['derrida-child'], F['derrida-data']);
+        item = new SufiaItem(
+          token, F.derrida, F['derrida-child'], F['derrida-data']);
       });
 
       it('sends the item to sufia', function () {
@@ -126,6 +126,54 @@ describe('SufiaClient', function () {
         return client.create(F.derrida.key, item)
           .finally(function () {
             expect(client.registry).to.have.property(F.derrida.key, '12345');
+          });
+      });
+    });
+
+    describe('.update()', function () {
+      var item, token = 'badc0de', id = 'sid';
+
+      beforeEach(function () {
+        client.registry[F.derrida.key] = id;
+
+        item = new SufiaItem(
+          token, F.derrida, F['derrida-child'], F['derrida-data']);
+      });
+
+      afterEach(function () {
+        delete client.registry[F.derrida.key];
+      });
+
+      it('sends the item to sufia', function () {
+        var mhttp = nock('http://localhost:3000')
+          .put('/api/items/' + id, function (body) {
+
+            expect(body).to.have.keys(['token', 'metadata', 'file']);
+            expect(body.token).to.eql(token);
+
+            expect(body.metadata.tags).to.contain(F.derrida.data.tags[0].tag);
+
+            return true;
+
+          }).reply(204);
+
+        return client.update(F.derrida.key, item)
+          .finally(function () { expect(mhttp.isDone()).to.be.true; });
+      });
+
+      it('tries to create on 404', function () {
+        var mhttp = nock('http://localhost:3000')
+          .put('/api/items/' + id)
+          .reply(404)
+          .post('/api/items')
+          .reply(201, '', {
+            Location: 'http://localhost:3000/api/items/12345'
+          });
+
+        return client.update(F.derrida.key, item)
+          .finally(function () {
+            expect(client.registry).to.have.property(F.derrida.key, '12345');
+            expect(mhttp.isDone()).to.be.true;
           });
       });
     });
