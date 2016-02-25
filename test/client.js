@@ -71,9 +71,9 @@ describe('SufiaClient', function () {
         extend({}, F.derrida, { children: [F['derrida-child']] });
 
       sinon.stub(client, 'download', function (item) {
-        return (item.key === F['derrida-child'].key)
-          ? B.resolve(F['derrida-data'])
-          : B.reject();
+        return (item.key === F['derrida-child'].key) ?
+          B.resolve(F['derrida-data']) :
+          B.reject();
       });
     });
 
