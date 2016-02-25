@@ -21,20 +21,20 @@
   },
   "homepage": "https://github.com/inukshuk/arkivo-sufia",
   "dependencies": {
-    "bluebird": "^2.8.1",
-    "debug": "^2.1.1",
+    "bluebird": "^3.3.1",
+    "debug": "*",
     "superagent": "^1.0.0"
   },
   "devDependencies": {
-    "arkivo": ">=0.0.2",
-    "chai": "^1.10.0",
-    "chai-as-promised": "^4.1.1",
-    "eslint": "^0.12.0",
-    "istanbul-harmony": "^0.3.1",
+    "arkivo": "~0",
+    "chai": "^3.5",
+    "chai-as-promised": "^5.2",
+    "eslint": "^2.2",
+    "istanbul": "^0.4.2",
     "mocha": "^2.1.0",
-    "nock": "^1.6.0",
+    "nock": "^7.2.2",
     "sinon": "^1.12.2",
     "sinon-chai": "^2.6.0",
-    "yuidocjs": "^0.5.0"
+    "yuidocjs": "*"
   }
 }
