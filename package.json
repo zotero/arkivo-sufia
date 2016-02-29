@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/inukshuk/arkivo-sufia",
   "dependencies": {
-    "arkivo": "^0.2.2",
+    "arkivo": "^0.2.3",
     "bluebird": "^3.3.1",
     "debug": "*",
     "superagent": "^1.0.0"
