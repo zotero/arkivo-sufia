@@ -23,12 +23,17 @@ var Subscription = arkivo.Subscription;
 
 var F = require('./fixtures.json').zotero;
 
+function delayed() { return B.delay(0); }
+
 describe('SufiaClient', function () {
   var client, session;
 
   beforeEach(function () {
     session = new Session(new Subscription());
     client  = new SufiaClient(null, session);
+
+    sinon.stub(session.subscription, 'remember', delayed);
+    sinon.stub(session.subscription, 'forget', delayed);
   });
 
   it('is a constructor function', function () {
@@ -125,7 +130,8 @@ describe('SufiaClient', function () {
 
         return client.create(F.derrida.key, item)
           .finally(function () {
-            expect(client.registry).to.have.property(F.derrida.key, '12345');
+            expect(session.subscription.remember)
+              .to.have.been.calledWith('sufia', F.derrida.key, '12345');
           });
       });
     });
@@ -134,14 +140,16 @@ describe('SufiaClient', function () {
       var item, token = 'badc0de', id = 'sid';
 
       beforeEach(function () {
-        client.registry[F.derrida.key] = id;
+        sinon.stub(session.subscription, 'lookup', function (plugin, key) {
+          return B.resolve(plugin === 'sufia' && key === F.derrida.key ? id : '');
+        });
 
         item = new SufiaItem(
           token, F.derrida, F['derrida-child'], F['derrida-data']);
       });
 
       afterEach(function () {
-        delete client.registry[F.derrida.key];
+        session.subscription.lookup.restore();
       });
 
       it('sends the item to sufia', function () {
@@ -161,6 +169,20 @@ describe('SufiaClient', function () {
           .finally(function () { expect(mhttp.isDone()).to.be.true; });
       });
 
+      it('tries to create if no known id', function () {
+        var mhttp = nock('http://localhost:3000')
+          .post('/api/items')
+          .reply(201, '', {
+            Location: 'http://localhost:3000/api/items/12345'
+          });
+
+        return client.update('unknown', item)
+          .finally(function () {
+            expect(session.subscription.remember)
+              .to.have.been.calledWith('sufia', 'unknown', '12345');
+            expect(mhttp.isDone()).to.be.true;
+          });
+      });
       it('tries to create on 404', function () {
         var mhttp = nock('http://localhost:3000')
           .put('/api/items/' + id)
@@ -172,7 +194,8 @@ describe('SufiaClient', function () {
 
         return client.update(F.derrida.key, item)
           .finally(function () {
-            expect(client.registry).to.have.property(F.derrida.key, '12345');
+            expect(session.subscription.remember)
+              .to.have.been.calledWith('sufia', F.derrida.key, '12345');
             expect(mhttp.isDone()).to.be.true;
           });
       });
