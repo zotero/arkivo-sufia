@@ -11,11 +11,15 @@ Install `arkivo-sufia` and (optionally) `hiredis` with NPM:
 
     $ npm install arkivo-sufia hiredis
 
-Add a minimal configuration file, e.g., `config/default.json`:
+Add a configuration file, e.g., `config/default.json`:
 
     {
       "arkivo": {
-        "plugins": [ "arkivo-sufia" ]
+        "plugins": [ "arkivo-sufia" ],
+        "controller": {
+          "delay": 5000,
+          "attempts": 5
+        }
       }
     }
 
