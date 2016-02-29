@@ -24,3 +24,6 @@ puppet
 
 # Test files
 test
+
+# Local config (for testing)
+config

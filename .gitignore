@@ -29,3 +29,6 @@ node_modules
 
 # Vagrant Cache
 .vagrant
+
+# Local config (for testing)
+config
