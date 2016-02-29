@@ -56,6 +56,9 @@ check the output of:
 
     $ $(npm bin)/arkivo-plugins list
 
+To enable debug output, set the DEBUG environment variable
+to 'arkivo:\*' or 'arkivo:\*,zotero:\*'.
+
 Subscriptions
 -------------
 
