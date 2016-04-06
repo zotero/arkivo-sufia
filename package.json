@@ -1,6 +1,6 @@
 {
   "name": "arkivo-sufia",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "A Zotero/Arkivo plugin to sync to Project Hydra services",
   "main": "lib/plugin.js",
   "scripts": {
